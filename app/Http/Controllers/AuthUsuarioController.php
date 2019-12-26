@@ -16,13 +16,12 @@ class AuthUsuarioController extends Controller
     public function iniciar_sesion(loginFormRequest $request){
  
     if (Auth::attempt(['rut' => $request->rut, 'password' => $request->clave],false)) {
-      //return view('layouts.app');
-      //header("Location: /home");
-    
+      
+      return response()->json(Auth::user(), 200);
     
     }
      else{
-       return response()->json('los datos ingresados son incorrectos');
+       return response()->json(['errors'=>'Los datos introducidos no son validos'], 401);
      }
   }
 }
